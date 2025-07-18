@@ -15,7 +15,6 @@ spec:
     spec:
       containers:
       - name: playground
-        # Version initiale
         image: wil42/playground:v1
         ports:
         - containerPort: 8888
@@ -26,12 +25,14 @@ metadata:
   name: playground-service
   namespace: dev
 spec:
+  type: NodePort
   selector:
     app: playground
   ports:
   - port: 8888
     targetPort: 8888
-  type: ClusterIP
+    nodePort: 30888
+    protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
